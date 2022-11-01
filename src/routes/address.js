@@ -9,8 +9,10 @@ const {
     createAddress,
     getAllAddressByUid,
     getAddressByAid,
-    updateAddressByAid
+    updateAddressByAid,
+    getAddressByUid
 } = require('../controller/AddressController')
+const loginCheck = require('../middleware/loginCheck')
 
 
 router.prefix('/api/user/address')
@@ -42,14 +44,20 @@ router.get('/',logicCheck, async function (ctx, next){
 
 
 // 获取单个收货地址
-router.get('/:aid',logicCheck, async function (ctx, next){
+router.get('/aid/:aid',logicCheck, async function (ctx, next){
     // :id 通过ctx.params.id
     const aid = ctx.params.aid
     const address = await getAddressByAid(aid)
     ctx.body = new SuccessModel(address, '返回单个地址成功')
 })
 
+// 获取默认地址
+router.get('/default', loginCheck, async function(ctx, next){
 
+    const uid = ctx.session.userInfo.userId
+    const result = await getAddressByUid(uid)
+    ctx.body = new SuccessModel(result, '返回默认地址成功')
+})
 
 // 更新收货地址
 router.patch("/:aid", logicCheck, async function (ctx, next){

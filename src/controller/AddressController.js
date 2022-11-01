@@ -28,7 +28,6 @@ async function createAddress(data, userId, userName){
  */
 async function getAllAddressByUid(userId){
     const addressList = await Address.find( { uid:userId }).sort({ updatedAt: -1})
-
     return addressList
 }
 
@@ -57,9 +56,21 @@ async function updateAddressByAid(aid, userId, data){
     return newAddress
 }
 
+
+/**
+ * 
+ */
+async function getAddressByUid(userId){
+    console.log('获取个人的单个地址', userId)
+    const address = await Address.findOne({uid: userId})
+    console.log('address',address)
+    return address
+}
+
 module.exports = {
     createAddress,
     getAllAddressByUid,
     getAddressByAid,
-    updateAddressByAid
+    updateAddressByAid,
+    getAddressByUid
 }
