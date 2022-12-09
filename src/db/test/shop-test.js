@@ -27,7 +27,22 @@ const Shop = require('../../models/Shop')
         //     slogan: '联合利华洗护满10减5'
         // })
 
-
+	await Shop.create({
+            shopName: '沃尔玛',
+            imgUrl: '/images/shop/wmt.jpeg',
+            sales: 10000,
+            expressLimit: 0,
+            expressPrice:5,
+            slogan: 'VIP尊享满89元减4元运费券（每月3张）'
+        })
+        await Shop.create({
+            shopName: '山姆会员商店',
+            imgUrl: '/images/shop/sam.jpeg',
+            sales: 2000,
+            expressLimit: 0,
+            expressPrice:5,
+            slogan: '联合利华洗护满10减5'
+        })
 
         /**
          * 附件（热门） 商店

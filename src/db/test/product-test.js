@@ -8,9 +8,10 @@ const Product = require('../../models/Product')
 !(
     async ()=>{
         // fruit,seckill,all
-        const shopId_wal = '63494c718fafa22d4ed95e31'
-        const shopId_sam = '63494c718fafa22d4ed95e34'
-
+	// const shopId_wal = '63494c718fafa22d4ed95e31'
+        // const shopId_sam = '63494c718fafa22d4ed95e34'
+	 const shopId_wal = '63540080e1cb5c6273a3f79b'
+        const shopId_sam = '63540080e1cb5c6273a3f79e'
 
 
         /**

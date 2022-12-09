@@ -18,7 +18,15 @@ const User = require('../../models/User')
         //     username: '13433810978',
         //     password: 'abcd123'
         // })
-
+	await User.create({
+            username: '张三',
+            password: 'abcd123'
+        })
+        await User.create({
+            username: '13433810978',
+            password: 'abcd123'
+        })
+        console.log('2')
         /**
          * 用户登录
          */
