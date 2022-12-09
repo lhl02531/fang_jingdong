@@ -20,7 +20,8 @@ const AddressSchema = mongoose.Schema({
     },
     city: String,
     location: String,
-    specificAddress: String
+    specificAddress: String,
+    defaultAddress: Boolean
 }, { timestamps: true })
 
 

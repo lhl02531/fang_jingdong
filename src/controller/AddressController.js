@@ -12,6 +12,11 @@ const Address = require('../models/Address')
  * @param {String} userName 用户名
  */
 async function createAddress(data, userId, userName){
+    const {  defaultAddress } = data
+    if(defaultAddress){
+        const result = await Address.find({ uid:userId, defaultAddress}).updateOne({defaultAddress:false})
+        console.log('result', result)
+    }
     const newAddress = await Address.create({
         uid: userId,
         username:  userName,
@@ -47,7 +52,12 @@ async function getAddressByAid(aid){
  * @param {Objecct} data 前端传来的地址信息
  */
 async function updateAddressByAid(aid, userId, data){
-    console.log('更新地址 data', data)
+    // console.log('更新地址 data', data)
+    const {  defaultAddress } = data
+    if(defaultAddress){
+        const result = await Address.find({ uid:userId, defaultAddress}).updateOne({defaultAddress:false})
+        console.log('result', result)
+    }
     const newAddress = await Address.findOneAndUpdate(
         { _id: aid, uid: userId},
         {...data},
