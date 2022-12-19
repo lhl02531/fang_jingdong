@@ -77,7 +77,7 @@ async function getAllOrderByuid(userId){
 
     const orderList = Order.find({
         uid: userId
-    })
+    }).sort({ createdAt: -1 })
     return orderList
 }
 
