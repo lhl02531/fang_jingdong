@@ -68,19 +68,33 @@ async function updateAddressByAid(aid, userId, data){
 
 
 /**
- * 
+ * 获取用户地址数组的第一个匹配
+ * @param {*} userId 
+ * @returns 
  */
 async function getAddressByUid(userId){
     console.log('获取个人的单个地址', userId)
-    const address = await Address.findOne({uid: userId})
-    console.log('address',address)
+    const address = await Address.find({uid: userId}).limit(1)
+    
     return address
 }
+
+/**
+ * 获取用户默认地址
+ * @param {*} userId 
+ * @returns 
+ */
+async function getDefaultAddress(userId){
+    const address = await Address.findOne({ uid: userId, defaultAddress: true })
+    return address
+}
+
 
 module.exports = {
     createAddress,
     getAllAddressByUid,
     getAddressByAid,
     updateAddressByAid,
-    getAddressByUid
+    getAddressByUid,
+    getDefaultAddress
 }

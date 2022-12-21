@@ -10,7 +10,8 @@ const {
     getAllAddressByUid,
     getAddressByAid,
     updateAddressByAid,
-    getAddressByUid
+    getAddressByUid,
+    getDefaultAddress
 } = require('../controller/AddressController')
 const loginCheck = require('../middleware/loginCheck')
 
@@ -55,8 +56,13 @@ router.get('/aid/:aid',logicCheck, async function (ctx, next){
 router.get('/default', loginCheck, async function(ctx, next){
 
     const uid = ctx.session.userInfo.userId
-    const result = await getAddressByUid(uid)
-    ctx.body = new SuccessModel(result, '返回默认地址成功')
+    const result = await getDefaultAddress(uid)
+    if(result)
+        ctx.body = new SuccessModel(result, '返回默认地址成功')
+    else{
+        const address = await getAddressByAid(aid)
+        ctx.body = new SuccessModel(address, '返回单个地址成功')
+    }
 })
 
 // 更新收货地址
