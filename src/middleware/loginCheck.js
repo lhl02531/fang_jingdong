@@ -4,6 +4,7 @@
 const { ErrorModel } = require('../res-model/index')
 module.exports = async (ctx, next) =>{
     const session = ctx.session
+    console.info('ctx.session',ctx.session)
     if(session && session.userInfo){
         await next()
         return
