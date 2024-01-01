@@ -1,30 +1,34 @@
 /*
  *@Description: address model
-*/
+ */
 
-const mongoose = require('../db/db')
+const mongoose = require("../db/db");
 
-const AddressSchema = mongoose.Schema({
+const AddressSchema = mongoose.Schema(
+  {
     uid: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     username: String,
     recevierName: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     phoneNumber: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
+    province: String,
     city: String,
-    location: String,
-    specificAddress: String,
-    defaultAddress: Boolean
-}, { timestamps: true })
+    county: String,
+    addressDetail: String,
+    areaCode: String,
+    isDefault: Boolean,
+  },
+  { timestamps: true }
+);
 
+const Address = mongoose.model("address", AddressSchema);
 
-const Address = mongoose.model('address', AddressSchema)
-
-module.exports = Address
+module.exports = Address;
