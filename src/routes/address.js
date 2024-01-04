@@ -28,7 +28,7 @@ router.post("/", logicCheck, async function (ctx, next) {
     ctx.body = new SuccessModel(result, "创建地址成功");
   } catch (error) {
     console.error("创建地址失败", error);
-    ctx.body = new ErrorModel(2001, `创建地址失败--${error}`);
+    ctx.body = new ErrorModel(2001, `创建地址失败`);
   }
 });
 
@@ -51,12 +51,7 @@ router.get("/:aid", logicCheck, async function (ctx, next) {
 // 获取默认地址
 router.get("/default/1", loginCheck, async function (ctx, next) {
   const { userId: uid } = ctx.session.userInfo;
-  // const result = await getDefaultAddress(uid);
-  // if (result) ctx.body = new SuccessModel(result, "返回默认地址成功");
-  // else {
-  //   // const address = await getAddressByAid();
-  //   // ctx.body = new SuccessModel(address, "返回单个地址成功");
-  // }
+
   const result = await getDefaultAddress(uid);
   ctx.body = new SuccessModel(result, "返回默认地址");
 });
