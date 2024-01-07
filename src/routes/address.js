@@ -40,8 +40,8 @@ router.get("/", logicCheck, async function (ctx, next) {
   ctx.body = new SuccessModel(result, "获取全部地址成功");
 });
 
-// 获取单个收货地址
-router.get("/:aid", logicCheck, async function (ctx, next) {
+// 根据 id 获取地址
+router.get("/aid/:aid", logicCheck, async function (ctx, next) {
   // :id 通过ctx.params.id
   const aid = ctx.params.aid;
   const address = await getAddressByAid(aid);
@@ -49,15 +49,15 @@ router.get("/:aid", logicCheck, async function (ctx, next) {
 });
 
 // 获取默认地址
-router.get("/default/1", loginCheck, async function (ctx, next) {
+router.get("/default", loginCheck, async function (ctx, next) {
   const { userId: uid } = ctx.session.userInfo;
 
   const result = await getDefaultAddress(uid);
   ctx.body = new SuccessModel(result, "返回默认地址");
 });
 
-// 更新收货地址
-router.patch("/:aid", logicCheck, async function (ctx, next) {
+// 根据 id 更新对应收货地址
+router.patch("/aid/:aid", logicCheck, async function (ctx, next) {
   const aid = ctx.params.aid;
   const uid = ctx.session.userInfo.userId;
   const data = ctx.request.body;
@@ -70,8 +70,8 @@ router.patch("/:aid", logicCheck, async function (ctx, next) {
   }
 });
 
-// 删除收获地址
-router.delete("/:aid", logicCheck, async function (ctx, next) {
+// 根据 id 删除对应收获地址
+router.delete("/aid/:aid", logicCheck, async function (ctx, next) {
   const aid = ctx.params.aid;
   const uid = ctx.session.userInfo.userId;
   try {

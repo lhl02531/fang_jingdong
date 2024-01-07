@@ -4,7 +4,10 @@ const { SuccessModel, ErrorModel } = require("../res-model/index");
 router.prefix("/api/user");
 
 router.post("/register", async function (ctx, next) {
-  const { username, password } = ctx.request.body;
+  const { username, password, confirm_password } = ctx.request.body;
+  if (password !== confirm_password) {
+    ctx.body = new ErrorModel(1001, "注册失败-两次密码不一致");
+  }
   try {
     const newUser = await register(username, password);
     newUser.password = undefined;
